@@ -2,7 +2,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.models import Model
 import numpy as np
-import cv2
+
 # See https://keras.io/api/applications/ for details
 
 class FeatureExtractor:
@@ -19,7 +19,7 @@ class FeatureExtractor:
         Returns:
             feature (np.ndarray): deep feature with the shape=(4096, )
         """
-        img = img.resize(224, 224)  # VGG must take a 224x224 img as an input
+        img = img.resize((224,224))  # VGG must take a 224x224 img as an input
         img = img.convert('RGB')  # Make sure img is color
         x = image.img_to_array(img)  # To np.array. Height x Width x Channel. dtype=float32
         x = np.expand_dims(x, axis=0)  # (H, W, C)->(1, H, W, C), where the first elem is the number of img
